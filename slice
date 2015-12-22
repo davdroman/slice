@@ -1,0 +1,55 @@
+#!/bin/sh
+
+sizes1x="29 40 76"
+sizes2x="29 40 60 76 83.5"
+sizes3x="29 40 60"
+
+if [[ -z `which convert` ]]; then
+    echo "Requires ImageMagick! Try `brew install imagemagick`"
+    exit 1
+fi
+
+source="$1"
+assetspath="${2%/}/AppIcon.appiconset"
+
+if [[ -z "${source}" ]]; then
+    echo "Usage: $0 <source> <assetspath>"
+    exit 1
+fi
+
+echo
+echo "Creating 1x icons..."
+for size in ${sizes1x}
+do
+    sizename=${size}
+    output="${assetspath}/Icon-${sizename}.png"
+    cp "${source}" "${output}"
+    convert -resize ${size}x${size} "${output}" "${output}"
+    identify "${output}" | awk '{ print $1 " " $3 }'
+done
+
+echo
+echo "Creating 2x icons..."
+for size in ${sizes2x}
+do
+    sizename=${size}
+    size=`bc <<< "2*${size}"`
+    output="${assetspath}/Icon-${sizename}@2x.png"
+    cp "${source}" "${output}"
+    convert -resize ${size}x${size} "${output}" "${output}"
+    identify "${output}" | awk '{ print $1 " " $3 }'
+done
+
+echo
+echo "Creating 3x icons..."
+for size in ${sizes3x}
+do
+    sizename=${size}
+    size=`bc <<< "3*${size}"`
+    output="${assetspath}/Icon-${sizename}@3x.png"
+    cp "${source}" "${output}"
+    convert -resize ${size}x${size} "${output}" "${output}"
+    identify "${output}" | awk '{ print $1 " " $3 }'
+done
+
+echo
