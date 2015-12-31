@@ -1,4 +1,4 @@
-## slice
+# slice
 
 This script is an enhanced version of [__diversify__](https://github.com/mapbox/diversify), adding support for decimal sizes and direct output to your `AppIcon.appiconset`.
 
