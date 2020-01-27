@@ -1,8 +1,8 @@
 #!/bin/sh
 
-sizes1x="29 40 76"
-sizes2x="29 40 60 76 83.5"
-sizes3x="29 40 60"
+sizes1x="20 29 40 76 1024"
+sizes2x="20 29 40 60 76 83.5"
+sizes3x="20 29 40 60"
 
 if [[ -z `which convert` ]]; then
     echo "Requires ImageMagick! Try `brew install imagemagick`"
